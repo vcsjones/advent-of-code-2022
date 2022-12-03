@@ -1,4 +1,4 @@
-#!/usr/bin/env bundle exec ruby
+#!/usr/bin/env -S bundle exec ruby
 
 chunks = File.readlines(File.join(__dir__, 'day1-input.txt')).map(&:strip).chunk do |line|
   if line.strip.empty?

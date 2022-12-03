@@ -1,4 +1,4 @@
-#!/usr/bin/env bundle exec ruby
+#!/usr/bin/env -S bundle exec ruby
 
 def objectify(play)
   case play
