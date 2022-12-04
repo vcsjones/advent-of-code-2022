@@ -1,4 +1,4 @@
-#!/usr/bin/env -S bundle exec ruby
+#!/usr/bin/env ruby
 
 def score(letter)
   case letter
