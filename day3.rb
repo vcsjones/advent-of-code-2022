@@ -11,7 +11,7 @@ def score(letter)
   end
 end
 
-lines = File.readlines(File.join(__dir__, 'day3-input.txt')).map(&:strip)
+lines = File.readlines(File.join(__dir__, 'DAY3DATA')).map(&:strip)
 
 part1 = lines.map { |str|
   compartment1 = str[0, str.length / 2].chars
