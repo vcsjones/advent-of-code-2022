@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-chunks = File.readlines(File.join(__dir__, 'day1-input.txt')).map(&:strip).chunk do |line|
+chunks = File.readlines(File.join(__dir__, 'DAY1DATA')).map(&:strip).chunk do |line|
   if line.strip.empty?
     :_separator
   else
