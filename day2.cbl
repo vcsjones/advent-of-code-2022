@@ -1,0 +1,67 @@
+IDENTIFICATION DIVISION. *> Compile and run with cobc -std=cobol2014 --free -x day2.cbl && ./day2
+PROGRAM-ID. DAY2.
+
+ENVIRONMENT DIVISION.
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.
+    SELECT DAY2DATA ASSIGN TO INPUT
+    ORGANIZATION IS LINE SEQUENTIAL.
+
+DATA DIVISION.
+FILE SECTION.
+FD DAY2DATA.
+    01 STRATEGY.
+        05 RESULT PIC X(3).
+
+WORKING-STORAGE SECTION.
+77 WS-EOF PIC A(1).
+77 WS-PART1-SUM PIC 9(9).
+77 WS-INDEX-1 PIC 9(1).
+77 WS-INDEX-2 PIC 9(1).
+77 WS-SCORE PIC 9(1).
+01 WS-STRATEGY.
+    05 WS-RESULT-LEFT PIC X(1).
+    05 WS-BLANK PIC X(1).
+    05 WS-RESULT-RIGHT PIC X(1).
+01 WS-PART1-LOOKUP-TABLE.
+    05 WS-PART1-LOOKUP-TABLE-RESULT OCCURS 3 TIMES.
+        10 WS-PART1-LOOKUP-FINAL OCCURS 3 TIMES.
+            15 Z PIC 9(1).
+
+PROCEDURE DIVISION.
+    MOVE '417852396' TO WS-PART1-LOOKUP-TABLE.
+
+    OPEN INPUT DAY2DATA.
+        PERFORM UNTIL WS-EOF='Y'
+            READ DAY2DATA INTO WS-STRATEGY
+                AT END MOVE 'Y' TO WS-EOF
+                NOT AT END
+
+                IF (WS-RESULT-LEFT EQUAL TO "A")
+                    MOVE 1 TO WS-INDEX-1
+                END-IF
+                IF (WS-RESULT-LEFT EQUAL TO "B")
+                    MOVE 2 TO WS-INDEX-1
+                END-IF
+                IF (WS-RESULT-LEFT EQUAL TO "C")
+                    MOVE 3 TO WS-INDEX-1
+                END-IF
+                IF (WS-RESULT-RIGHT EQUAL TO "X")
+                    MOVE 1 TO WS-INDEX-2
+                END-IF
+                IF (WS-RESULT-RIGHT EQUAL TO "Y")
+                    MOVE 2 TO WS-INDEX-2
+                END-IF
+                IF (WS-RESULT-RIGHT EQUAL TO "Z")
+                    MOVE 3 TO WS-INDEX-2
+                END-IF
+
+                MOVE WS-PART1-LOOKUP-FINAL(WS-INDEX-2, WS-INDEX-1) TO WS-SCORE
+                COMPUTE WS-PART1-SUM = WS-PART1-SUM + WS-SCORE
+            END-READ
+        END-PERFORM.
+
+        DISPLAY 'PART 1: ' WS-PART1-SUM
+    CLOSE DAY2DATA.
+    STOP RUN.
+

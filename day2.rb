@@ -86,7 +86,7 @@ def score_results(match)
   score_result(opponent, me)
 end
 
-lines = File.readlines(File.join( __dir__,'day2-input.txt'))
+lines = File.readlines(File.join(__dir__, 'DAY2DATA'))
 part1 = lines.map(&method(:score_match)).sum
 puts part1
 
