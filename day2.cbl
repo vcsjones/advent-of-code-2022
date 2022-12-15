@@ -43,24 +43,17 @@ PROCEDURE DIVISION.
                 AT END MOVE 'Y' TO WS-EOF
                 NOT AT END
 
-                IF (WS-RESULT-LEFT EQUAL TO "A")
-                    MOVE 1 TO WS-INDEX-1
-                END-IF
-                IF (WS-RESULT-LEFT EQUAL TO "B")
-                    MOVE 2 TO WS-INDEX-1
-                END-IF
-                IF (WS-RESULT-LEFT EQUAL TO "C")
-                    MOVE 3 TO WS-INDEX-1
-                END-IF
-                IF (WS-RESULT-RIGHT EQUAL TO "X")
-                    MOVE 1 TO WS-INDEX-2
-                END-IF
-                IF (WS-RESULT-RIGHT EQUAL TO "Y")
-                    MOVE 2 TO WS-INDEX-2
-                END-IF
-                IF (WS-RESULT-RIGHT EQUAL TO "Z")
-                    MOVE 3 TO WS-INDEX-2
-                END-IF
+                EVALUATE WS-RESULT-LEFT
+                    WHEN 'A' MOVE 1 TO WS-INDEX-1
+                    WHEN 'B' MOVE 2 TO WS-INDEX-1
+                    WHEN 'C' MOVE 3 TO WS-INDEX-1
+                END-EVALUATE
+
+                EVALUATE WS-RESULT-RIGHT
+                    WHEN 'X' MOVE 1 TO WS-INDEX-2
+                    WHEN 'Y' MOVE 2 TO WS-INDEX-2
+                    WHEN 'Z' MOVE 3 TO WS-INDEX-2
+                END-EVALUATE
 
                 MOVE WS-PART1-LOOKUP(WS-INDEX-2, WS-INDEX-1) TO WS-SCORE
                 COMPUTE WS-PART1-SUM = WS-PART1-SUM + WS-SCORE
@@ -74,4 +67,3 @@ PROCEDURE DIVISION.
         DISPLAY 'PART 2: ' WS-PART2-SUM
     CLOSE DAY2DATA.
     STOP RUN.
-
