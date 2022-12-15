@@ -7,7 +7,7 @@ def parse_pair(line)
   }
 end
 
-pairs = File.readlines(File.join(__dir__, 'day4-input.txt')).map(&:strip).map(&method(:parse_pair))
+pairs = File.readlines(File.join(__dir__, 'DAY4DATA')).map(&:strip).map(&method(:parse_pair))
 
 part1 = pairs.filter { |pair1, pair2|
     pair1.cover?(pair2) || pair2.cover?(pair1)
