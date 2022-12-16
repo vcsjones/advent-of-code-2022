@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-input = File.read(File.join(__dir__, 'day6-input.txt')).strip
+input = File.read(File.join(__dir__, 'DAY6DATA')).strip
 
 def window(input, window_size)
   Enumerator.new do |acc|
